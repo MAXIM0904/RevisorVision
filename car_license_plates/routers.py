@@ -22,8 +22,9 @@ async def generate_plates(amount: int = None, auth: str = Depends(authentication
 @car_plates.get("/get")
 async def all_numbers(id: int = None, auth: str = Depends(authentication.get_current_user),
                       db: Session = Depends(get_db)):
-    """ Функция возвращает  автомобильные номера из базы данных по id """
-    if id < 1 or id is None:
+    """ Функция возвращает автомобильные номера из базы данных по id """
+    print(id)
+    if id is None or id < 1:
         return utils.response_user(success=False, numbers="Введите корректный id")
     id_number = db.query(CarPlates).get(id)
     if id_number:
